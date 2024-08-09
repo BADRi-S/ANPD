@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+    <style>
+        body {
+            background-color: #ad7171;
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0; 
+            padding: 0; 
+            font-family: Arial, sans-serif; 
+        }
+        h1 {
+            margin: 70px; 
+            text-align: center;
+            color: #000; 
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.8); 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #7e6535; 
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Vehicle Number Plate Detection System</h1>
+    <div>
+        <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data" onsubmit="return validateFile()">
+            <label for="image">Upload an image to detect the vehicle number plate:</label>
+            <input type="file" id="image" name="file" accept=".jpg, .jpeg, .png" required>
+            <br>
+            <input type="submit" value="Upload">
+        </form>
+    </div>
+
+    <script>
+        function validateFile() {
+            const fileInput = document.getElementById('image');
+            const file = fileInput.files[0];
+            const allowedExtensions = ['jpg', 'jpeg', 'png'];
+
+            if (file) {
+                const fileName = file.name;
+                const fileExtension = fileName.split('.').pop().toLowerCase();
+
+                if (!allowedExtensions.includes(fileExtension)) {
+                    alert('Invalid file format. Only PNG, JPG, or JPEG files are allowed.');
+                    return false; // Prevent form submission
+                }
+            }
+            return true; // Proceed with form submission
+        }
+    </script>
+</body>
+</html>
